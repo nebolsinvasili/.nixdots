@@ -1,0 +1,7 @@
+import numpy as np
+
+print(np.array([1, 1, 1]))
+print(np.array([[1, 1, 1],
+               [1, 1, 1]]))
+
+print("Hello!")

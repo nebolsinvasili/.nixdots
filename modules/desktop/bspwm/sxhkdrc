@@ -1,0 +1,44 @@
+# 
+super + {_,shift + }Return
+  {alacritty,bspc node -s biggest.local}
+
+#ВЫЙТИ/ПЕРЕЗАГРУЗИТЬ BSPWM
+super + shift + {q,r}
+  bspc {quit,wm -r}
+
+#ПЕРЕЗАГРУЗИТЬ КОНФИГ SXHKD
+super + ctrl + s
+  pkill -USR1 -x sxhkd
+
+#ПЕРЕЗАГРУЗКА/ВЫКЛЮЧЕНИЕ
+super + ctrl + {r,p}
+        {reboot,poweroff}
+
+######
+#ПОМЕНЯТЬ СТАТУС ОКНА НА 
+    /ТАЙЛОВОЕ
+    /ПСЕВДО ТАЙЛОВОЕ
+    /ПЛАВАЮЩЕЕ
+    /ПОЛНОЭКРАННОЕ
+alt + {t,shift + t,f,shift + f}
+	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
+	bspc node -g {marked,locked,sticky,private}
+
+#ВЫБРАТЬ НАПРАВЛЕНИЕ В КОТОРОМ ОТКРОЕТСЯ НОВОЕ ОКНО
+#ОТМЕНИТЬ НАПРАВЛЕНИЕ
+super + alt + {Left,Down,Up,Right,space}
+	bspc node -p {west,south,north,east,cancel}
+
+#ПЕРЕКЛЮЧИТСЯ НА ВОРКСПЕЙС ИЛИ ПЕРЕТАЩИТЬ НА НЕГО АКТИВНОЕ ОКНО
+super + {_,shift + }{1-9,0}
+	bspc {desktop -f,node -d} '^{1-9,10}'
+
+#ЗАКРЫТЬ ОКНО ИЛИ УБИТЬ ЕГО
+super + {_, shift + }c
+	bspc node -{c}
+
+
+
+super + f
+  google-chrome-stable
+
