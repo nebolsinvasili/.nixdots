@@ -53,4 +53,9 @@
   home.sessionPath = [
     "$HOME/.local/bin"
   ];
+  
+  #home.file."/home/nebolsinvasili/.zsh/themes" = { source = ./system/shell/themes/catppuccin_frappe-zsh-syntax-highlighting.zsh; recursive = true;};
+  #home.file."/home/nebolsinvasili/.zsh/themes" = { source = ./system/shell/themes/catppuccin_latte-zsh-syntax-highlighting.zsh; recursive = true;};
+  #home.file."/home/nebolsinvasili/.zsh/themes" = { source = ./system/shell/themes/catppuccin_macchiato-zsh-syntax-highlighting.zsh; recursive = true;};
+  #home.file."/home/nebolsinvasili/.zsh/themes" = { source = ./system/shell/themes/catppuccin_mocha-zsh-syntax-highlighting.zsh; recursive = true;};
 }

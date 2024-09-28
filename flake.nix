@@ -37,10 +37,10 @@
       systemSettings = {
         hostname = "nixos";
 	system = "x86_64-linux"; # system arch
-        profile = "notebook"; # select a profile defined from my profiles directory
+        profile = "pc"; # select a profile defined from my profiles directory
         timezone = "Europe/Moscow"; # select timezone
         locale = "ru_RU.UTF-8"; # select locale
-        bootMode = "uefi"; # uefi or bios
+        bootMode = if (systemSettings.profile == "notebook") then "bios" else "uefi"; # uefi or bios
 	bootMountPath = if (systemSettings.bootMode == "bios") then "/boot" else "/boot/efi"; # mount path for efi boot partition; only used for uefi boot mode
         grubDevice = if (systemSettings.profile == "notebook") then "nodev" else "/dev/sda"; # device identifier for grub; only used for legacy (bios) boot mode
         gpuType = "intel"; # amd, intel or nvidia; only makes some slight mods for amd at the moment
@@ -82,7 +82,7 @@
       # use nixpkgs if running a server (homelab or worklab profile)
       # otherwise use patched nixos-unstable nixpkgs
     
-      pkgs = (if ((systemSettings.profile == "default") || (systemSettings.profile == "notebook")) then
+      pkgs = (if ((systemSettings.profile == "pc") || (systemSettings.profile == "notebook")) then
         pkgs-stable
       else
         pkgs-unstable   
@@ -108,7 +108,7 @@
       # configure lib
       # use nixpkgs if running a server (homelab or worklab profile)
       # otherwise use patched nixos-unstable nixpkgs
-      lib = (if ((systemSettings.profile == "defailt") || (systemSettings.profile == "notebook"))
+      lib = (if ((systemSettings.profile == "pc") || (systemSettings.profile == "notebook"))
         then
           inputs.nixpkgs-stable.lib
         else
@@ -118,7 +118,7 @@
 
       # use home-manager-stable if running a server (homelab or worklab profile)
       # otherwise use home-manager-unstable
-      home-manager = (if ((systemSettings.profile == "default") || (systemSettings.profile == "notebook"))
+      home-manager = (if ((systemSettings.profile == "pc") || (systemSettings.profile == "notebook"))
         then
           inputs.home-manager-stable
         else

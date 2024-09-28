@@ -65,7 +65,7 @@
         
         oh-my-zsh = {
           enable = true;
-          plugins = [ 
+	  plugins = [ 
             "sudo"
             "git"
             "docker"
@@ -75,7 +75,7 @@
           ];
 
           extraConfig = ''
-            export EDITOR='nvim'
+	    export EDITOR='nvim'
             export TERMINAL='kitty'
             export BROWSER='firefox'
             export TERM="xterm-256color"
@@ -100,4 +100,3 @@
     };
   };
 }
-
