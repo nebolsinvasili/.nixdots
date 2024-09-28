@@ -43,28 +43,7 @@ in {
     programs.tmux = {
       enable = true;
       shell = "${pkgs.zsh}/bin/zsh";
-      extraConfig = ''
-        set-option -g default-terminal 'screen-256color'
-        set-option -g terminal-overrides ',xterm-256color:RGB'
-        
-        set -g prefix ^A
-        set -g base-index 1              # start indexing windows at 1 instead of 0
-        set -g detach-on-destroy off     # don't exit from tmux when closing a session
-        set -g escape-time 0             # zero-out escape time delay
-        set -g history-limit 10000     # increase history size (from 2,000)
-        set -g renumber-windows on       # renumber all windows when any window is closed
-        set -g set-clipboard on          # use system clipboard
-        set -g status-position top       # macOS / darwin style
-        setw -g mode-keys vi
-        set -g pane-active-border-style 'fg=magenta,bg=default'
-        set -g pane-border-style 'fg=brightblack,bg=default'
-        set -g @fzf-url-fzf-options '-p 60%,30% --prompt="   " --border-label=" Open URL "'
-        set -g @fzf-url-history-limit '2000'
-
-        # activity
-        set -g monitor-activity on
-        set -g visual-activity off
-      '';
+      extraConfig = builtins.readFile ./tmux.conf;
       plugins = with pkgs.tmuxPlugins; [
         sensible
         yank
@@ -77,9 +56,9 @@ in {
 	        extraConfig = ''
             set -g @catppuccin_status_background "default"
 
-            set -g @catppuccin_window_left_separator ""
-            set -g @catppuccin_window_right_separator " "
-            set -g @catppuccin_window_middle_separator " █"
+            set -g @catppuccin_window_left_separator "  "
+            set -g @catppuccin_window_right_separator "  "
+            set -g @catppuccin_window_middle_separator " █ "
       	    set -g @catppuccin_window_number_position "right"
       	    set -g @catppuccin_window_default_fill "number"
       	    set -g @catppuccin_window_default_text "#W"
@@ -87,8 +66,8 @@ in {
       	    set -g @catppuccin_window_current_text "#W#{?window_zoomed_flag,(),}"
       	    set -g @catppuccin_status_modules_right "directory meetings date_time"
       	    set -g @catppuccin_status_modules_left "session"
-      	    set -g @catppuccin_status_left_separator  " "
-      	    set -g @catppuccin_status_right_separator " "
+      	    set -g @catppuccin_status_left_separator  "  "
+      	    set -g @catppuccin_status_right_separator "  "
       	    set -g @catppuccin_status_right_separator_inverse "no"
       	    set -g @catppuccin_status_fill "icon"
       	    set -g @catppuccin_status_connect_separator "no"
