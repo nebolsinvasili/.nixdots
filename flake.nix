@@ -25,10 +25,10 @@
       inputs.nixpkgs.follows = "nixpkgs-stable";
     };
 
-    nixvim = {
-      url = "github:nebolsinvasili/nixvim";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    #nixvim = {
+    #  url = "github:nebolsinvasili/nixvim";
+    #  inputs.nixpkgs.follows = "nixpkgs";
+    #};
   };
 
   outputs = inputs@{ self, etc-nixos, ...}: #, nixvim, ... }:
@@ -40,9 +40,9 @@
         profile = "notebook"; # select a profile defined from my profiles directory
         timezone = "Europe/Moscow"; # select timezone
         locale = "ru_RU.UTF-8"; # select locale
-        bootMode = "bios"; # uefi or bios
+        bootMode = "uefi"; # uefi or bios
 	bootMountPath = if (systemSettings.bootMode == "bios") then "/boot" else "/boot/efi"; # mount path for efi boot partition; only used for uefi boot mode
-        grubDevice = "/dev/sda"; # device identifier for grub; only used for legacy (bios) boot mode
+        grubDevice = if (systemSettings.profile == "notebook") then "nodev" else "/dev/sda"; # device identifier for grub; only used for legacy (bios) boot mode
         gpuType = "intel"; # amd, intel or nvidia; only makes some slight mods for amd at the moment
       };
 
@@ -156,7 +156,7 @@
       ${userSettings.username} = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         modules = [
-					(./. + ("/home") + "/home.nix") # load home.nix from selected PROFILE
+	  (./. + ("/home") + "/home.nix") # load home.nix from selected PROFILE
         ];
 	extraSpecialArgs = {
 	  # pass config variables from above
