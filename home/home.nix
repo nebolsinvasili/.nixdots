@@ -45,7 +45,8 @@
   };
   
   home.packages = with pkgs; [
-    inputs.nixvim.packages.${pkgs.system}.default
+    neovim
+    #inputs.nixvim.packages.${pkgs.system}.default
   ];
 
   # Add support for .local/bin

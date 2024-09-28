@@ -4,61 +4,116 @@
   config,
   ...
 }:
-{
+let
+  tmux-sessionx = pkgs.tmuxPlugins.mkTmuxPlugin {
+      pluginName = "tmux-sessionx";
+      version = "unstable-2023-01-06";
+      src = pkgs.fetchFromGitHub {
+        owner = "omerxx";
+        repo = "tmux-sessionx";
+        rev = "4e71ae515497a09401d84e75d6dcede4cf1b178f";
+        sha256 = "sha256-Ig6+pB8us6YSMHwSRU3sLr9sK+L7kbx2kgxzgmpR920=";
+      };
+    };
+  tmux-floax = pkgs.tmuxPlugins.mkTmuxPlugin {
+      pluginName = "tmux-floax";
+     version = "unstable-2023-01-06";
+      src = pkgs.fetchFromGitHub {
+        owner = "omerxx";
+        repo = "tmux-floax";
+        rev = "f7a4adfeb055e1b1d268d7484de8362f242bd11e";
+        sha256 = "sha256-Ig6+pB8us6YSMHwSRU3sLr9sK+L7kbx2kgxzgmpR920=";
+      };
+    };
+  catppuccin-tmux = pkgs.tmuxPlugins.mkTmuxPlugin {
+      pluginName = "catppuccin-tmux";
+      version = "unstable-2023-01-06";
+      src = pkgs.fetchFromGitHub {
+        owner = "omerxx";
+        repo = "catppuccin-tmux";
+        rev = "e30336b79986e87b1f99e6bd9ec83cffd1da2017";
+        sha256 = "sha256-Ig6+pB8us6YSMHwSRU3sLr9sK+L7kbx2kgxzgmpR920=";
+      };
+  };
+in {
   options = {
     tmux.enable = lib.mkEnableOption "Enable tmux module";
   };
   config = lib.mkIf config.tmux.enable {
     programs.tmux = {
       enable = true;
-      terminal = "screen-256color";
-      mouse = true;
-      baseIndex = 1;
-      prefix = "C-a";
-      keyMode = "vi";
-      shortcut = "a";
-      historyLimit = 10000;
       shell = "${pkgs.zsh}/bin/zsh";
+      extraConfig = ''
+        set-option -g default-terminal 'screen-256color'
+        set-option -g terminal-overrides ',xterm-256color:RGB'
+        
+        set -g prefix ^A
+        set -g base-index 1              # start indexing windows at 1 instead of 0
+        set -g detach-on-destroy off     # don't exit from tmux when closing a session
+        set -g escape-time 0             # zero-out escape time delay
+        set -g history-limit 10000     # increase history size (from 2,000)
+        set -g renumber-windows on       # renumber all windows when any window is closed
+        set -g set-clipboard on          # use system clipboard
+        set -g status-position top       # macOS / darwin style
+        setw -g mode-keys vi
+        set -g pane-active-border-style 'fg=magenta,bg=default'
+        set -g pane-border-style 'fg=brightblack,bg=default'
+        set -g @fzf-url-fzf-options '-p 60%,30% --prompt="   " --border-label=" Open URL "'
+        set -g @fzf-url-history-limit '2000'
+
+        # activity
+        set -g monitor-activity on
+        set -g visual-activity off
+      '';
       plugins = with pkgs.tmuxPlugins; [
-        yank
         sensible
+        yank
+        tmux-thumbs
         tmux-fzf
+        fzf-tmux-url
         vim-tmux-navigator
         {
           plugin = catppuccin;
-	  extraConfig = ''
+	        extraConfig = ''
             set -g @catppuccin_status_background "default"
 
             set -g @catppuccin_window_left_separator ""
             set -g @catppuccin_window_right_separator " "
             set -g @catppuccin_window_middle_separator " █"
-	    set -g @catppuccin_window_number_position "right"
-	    set -g @catppuccin_window_default_fill "number"
-	    set -g @catppuccin_window_default_text "#W"
-	    set -g @catppuccin_window_current_fill "number"
-	    set -g @catppuccin_window_current_text "#W#{?window_zoomed_flag,(),}"
-	    set -g @catppuccin_status_modules_right "directory meetings date_time"
-	    set -g @catppuccin_status_modules_left "session"
-	    set -g @catppuccin_status_left_separator  " "
-	    set -g @catppuccin_status_right_separator " "
-	    set -g @catppuccin_status_right_separator_inverse "no"
-	    set -g @catppuccin_status_fill "icon"
-	    set -g @catppuccin_status_connect_separator "no"
-	    set -g @catppuccin_directory_text "#{b:pane_current_path}"
-	    set -g @catppuccin_meetings_text "#($HOME/.config/tmux/scripts/cal.sh)"
-	    set -g @catppuccin_date_time_text "%H:%M"
-	  '';
+      	    set -g @catppuccin_window_number_position "right"
+      	    set -g @catppuccin_window_default_fill "number"
+      	    set -g @catppuccin_window_default_text "#W"
+      	    set -g @catppuccin_window_current_fill "number"
+      	    set -g @catppuccin_window_current_text "#W#{?window_zoomed_flag,(),}"
+      	    set -g @catppuccin_status_modules_right "directory meetings date_time"
+      	    set -g @catppuccin_status_modules_left "session"
+      	    set -g @catppuccin_status_left_separator  " "
+      	    set -g @catppuccin_status_right_separator " "
+      	    set -g @catppuccin_status_right_separator_inverse "no"
+      	    set -g @catppuccin_status_fill "icon"
+      	    set -g @catppuccin_status_connect_separator "no"
+      	    set -g @catppuccin_directory_text "#{b:pane_current_path}"
+      	    set -g @catppuccin_meetings_text "#($HOME/.config/tmux/scripts/cal.sh)"
+      	    set -g @catppuccin_date_time_text "%H:%M"
+      	  '';
+        }
+        {
+          plugin = resurrect;
+          extraConfig = ''
+            set -g @resurrect-strategy-nvim 'session'
+          '';
+        }
+        {
+          plugin = continuum;
+          extraConfig = ''
+            set -g @continuum-restore 'on'
+          '';
         }
       ];
-      extraConfig = ''
-        set -g status-position top
-      '';
     };
 
     home.packages = with pkgs; [
-      # https://github.com/edr3x/tmux-sessionizer?tab=readme-ov-file#tmux-sessionizer
       tmux-sessionizer
-      # Script to find files with tmux in vim
       (writeShellScriptBin "tmux-sessionizer-script" ''
         if [[ $# -eq 1 ]]; then
             selected=$1
