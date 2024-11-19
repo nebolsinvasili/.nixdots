@@ -32,6 +32,7 @@
     wget
     nitrogen
     qbittorrent
+    zotero
   ];
 
   system.stateVersion = "24.05";

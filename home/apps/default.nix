@@ -6,6 +6,7 @@
     ./brouser/firefox
     ./brouser/chrome
     ./office/tex
+    #./office/zotero
     ./development/vscode
   ];
 
@@ -18,6 +19,7 @@
     firefox.enable = lib.mkDefault false;
     chrome.enable = lib.mkDefault true;
     tex.enable = lib.mkDefault true;
+    #zotero.enable = lib.mkDefault true;
     vscode.enable = lib.mkDefault true;
   };
 }

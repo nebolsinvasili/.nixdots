@@ -4,7 +4,7 @@ polybar &
 #pkill picom
 #picom --experimental-backends &
 #feh --bg-fill ~/Pictures/wall/1.jpg
-#~/.dotfiles/system/wm/bspwm/polybar/launch.sh 
+~/.nixdots/home/desktop/polybar/launch.sh
 numlockx &
 
 

@@ -1,6 +1,7 @@
 _: {
   imports = [
-    ./boot.nix
+    ./boot.nix    
+    ./virtualization.nix
     ./environment.nix
     #./hardware.nix
     #./keymap.nix

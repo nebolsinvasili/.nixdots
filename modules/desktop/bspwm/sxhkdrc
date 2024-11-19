@@ -1,6 +1,6 @@
 # 
 super + {_,shift + }Return
-  {alacritty,bspc node -s biggest.local}
+  {kitty,bspc node -s biggest.local}
 
 #ВЫЙТИ/ПЕРЕЗАГРУЗИТЬ BSPWM
 super + shift + {q,r}

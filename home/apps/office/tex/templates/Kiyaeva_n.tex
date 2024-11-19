@@ -1,0 +1,77 @@
+\documentclass[
+ %reprint,
+ aps, pra,
+ amsmath,amssymb,
+ 11pt,
+ final,
+% notitlepage,
+tightenlines,
+ %twoside,
+ %twocolumn,
+ nofloats,
+% nobibnotes,
+nofootinbib,
+ superscriptaddress,
+%noshowpacs,
+showkeys,
+showkeywords,
+%centertags
+ ]
+{revtex4-2}
+
+\usepackage[T2A]{fontenc}
+\usepackage[utf8x]{inputenc}
+\usepackage[russian,english]{babel}
+\usepackage{graphicx}% Include figure files
+\usepackage{dcolumn}% Align table columns on decimal point
+\usepackage{bm}% bold math
+%\usepackage{longtable}
+
+
+\input{maik.rty}
+
+
+%\renewcommand{\rmdefault}{lh}
+
+\setcitestyle{authoryear,round}
+\setlength{\bibhang}{1.5em}
+% Начало документа
+\begin{document}
+
+\selectlanguage{russian}
+
+\keywords{звезды: двойные и кратные---звезды: индивидуальные: ADS\,48}
+
+\title{НАЗВАНИЕ СТАТЬИ ЗАГЛАВНЫМИ БУКВАМИ}
+
+\author{\firstname{И.~О.}~\surname{Автор1}}
+ \email{example@list.ru}
+ \affiliation{Главная (Пулковская) астрономическая обсерватория
+РАН, Санкт-Петербург, 196140 Россия}
+
+\author{\firstname{И.~О.}~\surname{Автор2}}
+ \affiliation{Казанский (Приволжский) федеральный университет, Казань, 420008 Россия}
+
+\include{chapters/abstract.tex}
+\maketitle
+
+
+\section{ВВЕДЕНИЕ}
+
+
+\section{ЗАКЛЮЧЕНИЕ}
+
+В данной работе демонстрируется возможность\ldots
+
+\selectlanguage{russian}
+
+\include{chapters/intro.tex}
+\include{chapters/chapter_1.tex}
+
+\include{chapters/thanks.tex}
+
+%\bibliographystyle{aspb1}
+%\bibliography{Kiyaeva}
+\include{chapters/bibliography.tex}
+
+\end{document}

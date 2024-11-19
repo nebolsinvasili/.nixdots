@@ -1,0 +1,184 @@
+\usepackage{array}
+\usepackage{calc}
+\usepackage{ifthen}
+\usepackage{multirow}
+%\usepackage{tipa}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{mathtext}
+\usepackage{pifont}
+\usepackage{hhline}
+\usepackage{rotating}
+\usepackage{tabularx}
+\usepackage{afterpage}
+\usepackage{ifthen}
+\usepackage{soul}
+\usepackage{verbatim}
+\usepackage{enumerate}
+
+\makeatletter
+%\setcaptionwidth{\linewidth}
+%\renewcommand{\captionlabeldelim}{.~}
+%\renewcommand{\captionlabelfont}{\bfseries}
+%\renewcommand{\captionfont}{\footnotesize}
+\renewcommand \thefigure{\@arabic\c@figure}
+\renewcommand \thetable{\@arabic\c@table}
+\renewcommand{\arraystretch}{1.5}
+\setlength{\extrarowheight}{2pt}
+\setlength{\extratabsurround}{2pt}
+%%% Как в YADR.CLS
+\renewcommand{\topfraction}{.90}
+\renewcommand{\dbltopfraction}{.90}
+\renewcommand{\bottomfraction}{.90}
+\renewcommand{\textfraction}{0.10}
+\renewcommand{\floatpagefraction}{0.90}
+\renewcommand{\dblfloatpagefraction}{0.90}
+\setcounter{topnumber}{4}
+\setcounter{bottomnumber}{2}
+\setcounter{totalnumber}{6}
+%
+\newcommand{\PreserveBackslash}[1]{\let\temp=\\#1\let\\=\temp}
+\let\PBS=\PreserveBackslash
+\def\settabpars#1#2#3{\vskip#1mm \tabcolsep=#2pt \def\arraystretch{#3}}
+\newdimen\tabwidth\newdimen\tbwdth
+\newcommand{\stretchtab}[2][1.0]{\setbox0=\hbox{\tabcolsep=0sp\ignorespaces#2}
+          \setbox1=\hbox{\tabcolsep=1sp\ignorespaces#2}
+          \tabwidth=#1\hsize \advance\tabwidth by -\wd0
+          %\multiply\tabwidth by 1
+          \tbwdth=\wd1\advance\tbwdth by -\wd0
+          \divide\tabwidth by \tbwdth
+          \tabcolsep=\tabwidth #2}
+\newcommand\figcaption{\def\@captype{figure}\caption}
+% 26.07.2006 \newcommand\tabcaption{\def\@captype{table}\caption}
+\newcommand\tabcaption{\let\captionfont\small\def\@captype{table}\caption}
+%\renewcommand*\caption@@@normal{%
+%\parfillskip0pt plus 2fil%
+%  \caption@label\captiontext\par}
+
+\makeatother
+
+  
+\makeatletter%
+\def\notesname{Примечания}
+\def\partname{Часть}
+\def\tocname{Содержание}
+\def\lofname{Cписок илл.}
+\def\lotname{Cписок табл.}
+\def\refname{СПИСОК ЛИТЕРАТУРЫ}
+\def\indexname{Указатель}
+\def\figurename{Рис.}
+\def\figuresname{Рис.}%
+\def\tablename{Таблица}
+\def\tablesname{Таблицы}%
+\def\abstractname{}
+\def\appendixesname{ПРИЛОЖЕНИЯ}%
+\def\appendixname{ПРИЛОЖЕНИЕ}%
+\def\andname{\relax}%
+\def\acknowledgmentsname{Благодарности}
+\def\journalname{Астрофизический бюллетень}
+\def\copyrightname{??}
+\def\andname{\relax}%
+\def\@pacs@name{PACS numbers: }%
+\def\ppname{pp}
+\def\numbername{номер}
+\def\volumename{том}
+\def\Dated@name{ }%
+\def\Received@name{поступила в редакцию}%
+\def\Received@name{{\cyr\CYRP}{\cyr\cyro\cyrs\cyrt\cyry\cyrp\cyri\cyrl\cyra\ \cyrv\ \cyrr\cyre\cyrd\cyra\cyrk\cyrc\cyri\cyryu\ }}%Поступила в редакцию
+\def\Revised@name{,после доработки }%
+\def\Accepted@name{ }%
+\def\Published@name{опубликовано }%
+%\def\keywords{Ключевые слова: }%
+\def\@keys@name{Ключевые слова: }
+
+\makeatother%
+
+\def\@fnsymbol#1{\ensuremath{\ifcase#1\or \hbox{*\protect\phantom{***}}\or \hbox{**\protect\phantom{**}}\or \hbox{***\protect\phantom{*}}\or \hbox{****}\or
+  \hbox{*****}\or \hbox{******}\or \hbox{*******}\or  \hbox{********}\or \hbox{*********}\or
+  \hbox{**********}\or \hbox{***********}\or \hbox{************}
+  \else\@ctrerr\fi}}
+%
+%
+% Конец переопределения для статьи на русском языке
+%
+%
+%%%%% Следующие команды используются только с пакетом caption2 %%%%%
+
+
+%%%%% Конец команд, используемых только с пакетом caption2 %%%%%%%%%
+%
+% Включение нумерации таблиц, рисунков и библиографии арабскими цифрами
+%
+\makeatletter
+\renewcommand \thefigure{\@arabic\c@figure}
+\renewcommand \thetable{\@arabic\c@table}
+\def\place@bibnumber@inl#1{#1.}%
+%
+%
+\def\thepart          {\Roman{part}} %
+\def\thesection       {\arabic{section}}
+\def\p@section        {}
+\def\thesubsection    {\thesection.\arabic{subsection}}
+\def\p@subsection     {\thesection.}
+\def\thesubsubsection {\thesection.\arabic{subsection}.\arabic{subsubsection}}
+\def\p@subsubsection  {\thesection\,\thesubsection\,}
+\def\theparagraph     {\alph{paragraph}}
+\def\thesubparagraph  {\theparagraph.\arabic{subparagraph}}
+
+\def\section{%
+  \@startsection
+    {section}%
+    {1}%
+    {\z@}%
+  {0.8cm \@plus1ex \@minus .2ex}%
+  {0.5cm \@plus1ex \@minus.2ex}%
+    {%
+      \normalfont
+      \centering
+      \MakeTextUppercase
+    }%
+}%
+\def\@sectioncntformat#1{\csname the#1\endcsname.\quad}%
+\def\subsection{%
+  \@startsection
+    {subsection}%
+    {2}%
+    {\z@}%
+    {.8cm \@plus1ex \@minus .2ex}%
+    {.5cm \@plus1ex \@minus.2ex}%
+    {%
+     \normalfont\slshape
+     \centering
+    }%
+}%
+\def\subsubsection{%
+  \@startsection
+    {subsubsection}%
+    {3}%
+    {\z@}%
+    {.8cm \@plus1ex \@minus .2ex}%
+    {.5cm \@plus1ex \@minus.2ex}%
+    {%
+     \normalfont\small\itshape
+     \centering
+    }%
+}%
+% Команда для определения типа библиографичечской ссылки
+\def\refitem#1{\ifthenelse{\boolean{hmode}}{\protect\newline{}}{}%
+\textbackslash{}refitem\{\hbox{\bfseries{}%
+\itshape{}#1}\}\ifthenelse{\boolean{hmode}}{\protect\linebreak{}}{}}%
+
+\def\fnum@table{{\bfseries \tablename~\thetable}}%
+\def\fnum@figure{{\bfseries \figurename~\thefigure}}
+
+\def\bibsection{%
+ \@ifx@empty\refname{%
+  \par
+ }{%
+  \section*{\refname}%
+ }%
+}%
+\makeatother
+\endinput

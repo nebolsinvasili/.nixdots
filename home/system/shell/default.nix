@@ -80,12 +80,13 @@
             export BROWSER='firefox'
             export TERM="xterm-256color"
             
-	    PROMPT='%F{blue}  %1~%f%F{grey} ∮%  '
+	    #PROMPT='%(?.%F{blue} .%F{red} )%f %F{gray}%2~ ∮%  '
+	    PROMPT='%F{blue}  %2~%f%F{gray} ∮%  '
       
-            if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
-              exec tmux
-            fi
-
+#            if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
+#              exec tmux
+#            fi
+#
 	          function y() {
 	            local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
 	            yazi "$@" --cwd-file="$tmp"

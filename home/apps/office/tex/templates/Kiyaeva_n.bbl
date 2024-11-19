@@ -1,0 +1,15 @@
+\begin{thebibliography}{3}
+\providecommand{\natexlab}[1]{#1}
+
+\bibitem[{G{\"u}ntzel-Lingner}(1955)]{G-L}
+U.~{G{\"u}ntzel-Lingner}, Astronomische Nachrichten \textbf{282}~(4), 183
+  (1955).
+
+\bibitem[{Hopmann}(1964)]{Hopman}
+J.~{Hopmann}, Annalen der K.K. Sternwarte Wien \textbf{26}, 1 (1964).
+
+\bibitem[{Mason} et~al.(2016)]{WDS}
+B.~D. {Mason}, G.~L. {Wycoff}, W.~I. {Hartkopf}, et~al., VizieR Online Data
+  Catalog B/wds (2016).
+
+\end{thebibliography}

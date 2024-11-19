@@ -37,12 +37,12 @@
       systemSettings = {
         hostname = "nixos";
 	system = "x86_64-linux"; # system arch
-        profile = "pc"; # select a profile defined from my profiles directory
+        profile = "notebook"; # select a profile defined from my profiles directory
         timezone = "Europe/Moscow"; # select timezone
         locale = "ru_RU.UTF-8"; # select locale
         bootMode = if (systemSettings.profile == "notebook") then "bios" else "uefi"; # uefi or bios
 	bootMountPath = if (systemSettings.bootMode == "bios") then "/boot" else "/boot/efi"; # mount path for efi boot partition; only used for uefi boot mode
-        grubDevice = if (systemSettings.profile == "notebook") then "nodev" else "nodev"; #"/dev/sda"; # device identifier for grub; only used for legacy (bios) boot mode
+        grubDevice = if (systemSettings.profile == "notebook") then "/dev/sda" else "nodev"; #"/dev/sda"; # device identifier for grub; only used for legacy (bios) boot mode
         gpuType = "intel"; # amd, intel or nvidia; only makes some slight mods for amd at the moment
       };
 
