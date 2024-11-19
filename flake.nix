@@ -37,7 +37,7 @@
       systemSettings = {
         hostname = "nixos";
 	system = "x86_64-linux"; # system arch
-        profile = "notebook"; # select a profile defined from my profiles directory
+        profile = "pc"; # select a profile defined from my profiles directory
         timezone = "Europe/Moscow"; # select timezone
         locale = "ru_RU.UTF-8"; # select locale
         bootMode = if (systemSettings.profile == "notebook") then "bios" else "uefi"; # uefi or bios
